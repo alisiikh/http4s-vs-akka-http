@@ -1,7 +1,7 @@
 name := "http4s-vs-akka-http"
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.13.1"
+scalaVersion := "2.12.10"
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8", // source files are in UTF-8
@@ -10,7 +10,7 @@ scalacOptions ++= Seq(
   "-feature", // warn about misused language features
   "-language:higherKinds", // allow higher kinded types without `import scala.language.higherKinds`
   "-Xlint", // enable handy linter warnings
-  "-Xfatal-warnings", // turn compiler warnings into errors
+//  "-Xfatal-warnings", // turn compiler warnings into errors
   "-Ypartial-unification" // allow the compiler to unify type constructors of different arities
 )
 
@@ -33,6 +33,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % CirceVersion,
   "org.specs2" %% "specs2-core" % Specs2Version % "test",
   "ch.qos.logback" % "logback-classic" % LogbackVersion,
+  "io.chrisdavenport" %% "log4cats-slf4j"   % "1.0.1",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 )
 
