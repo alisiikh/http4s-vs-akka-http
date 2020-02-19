@@ -9,12 +9,11 @@ import akka.http.scaladsl.server.{ Directive0, RouteResult }
 
 trait LoggingDirectives extends DebuggingDirectives {
 
-  def logResponse: Directive0 =
-    DebuggingDirectives.logRequestResult(LoggingMagnet(logResponse(captureTime)))
+  def logResponse: Directive0 = logRequestResult(LoggingMagnet(logResponseHelper(captureTime)))
 
   private def captureTime: Long = System.nanoTime()
 
-  private def logResponse(
+  private def logResponseHelper(
       reqTime: Long,
       logLevel: LogLevel = Logging.InfoLevel
   )(logAdapter: LoggingAdapter): HttpRequest => RouteResult => Unit = { req => result =>
