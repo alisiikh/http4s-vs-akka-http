@@ -15,15 +15,27 @@ object AkkaHttpApp extends App with StrictLogging {
   val config =
     ConfigFactory
       .parseString(
-        """akka.http.server.parsing.max-content-length = 10g
-          |akka.http.client.parsing.max-content-length = 10g
+        """akka {
+          |  loggers = ["akka.event.slf4j.Slf4jLogger"]
+          |  loglevel = DEBUG
+          |  logging-filter = "akka.event.slf4j.Slf4jLoggingFilter"
+          |
+          |  http {
+          |    server {
+          |      parsing.max-content-length = 10g
+          |    }
+          |    client {
+          |      parsing.max-content-length = 10g
+          |    }
+          |  }
+          |}
           |""".stripMargin
       )
       .withFallback(ConfigFactory.load())
 
   implicit val system: ActorSystem    = ActorSystem("akka-http", config)
   implicit val mat: ActorMaterializer = ActorMaterializer()
-  implicit val ec: ExecutionContext   = ExecutionContext.global
+  implicit val ec: ExecutionContext   = system.dispatcher
 
   val host     = "0.0.0.0"
   val port     = 8080

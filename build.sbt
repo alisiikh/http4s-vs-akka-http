@@ -10,10 +10,11 @@ scalacOptions ++= Seq(
   "-feature", // warn about misused language features
   "-language:higherKinds", // allow higher kinded types without `import scala.language.higherKinds`
   "-Xlint", // enable handy linter warnings
-//  "-Xfatal-warnings", // turn compiler warnings into errors
+  "-Xfatal-warnings", // turn compiler warnings into errors
   "-Ypartial-unification" // allow the compiler to unify type constructors of different arities
 )
 
+val AkkaVersion = "2.6.3"
 val Http4sVersion = "0.21.0"
 val CirceVersion = "0.13.0-RC1"
 val Specs2Version = "4.8.3"
@@ -29,7 +30,8 @@ libraryDependencies ++= Seq(
   "org.http4s" %% "http4s-circe" % Http4sVersion,
   "org.http4s" %% "http4s-dsl" % Http4sVersion,
   "com.typesafe.akka" %% "akka-http" % "10.1.11",
-  "com.typesafe.akka" %% "akka-stream" % "2.5.26",
+  "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
+  "com.typesafe.akka" %% "akka-slf4j" % AkkaVersion,
   "io.circe" %% "circe-generic" % CirceVersion,
   "org.specs2" %% "specs2-core" % Specs2Version % "test",
   "ch.qos.logback" % "logback-classic" % LogbackVersion,

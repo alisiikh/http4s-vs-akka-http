@@ -22,7 +22,7 @@ trait LoggingDirectives extends DebuggingDirectives {
       case Complete(resp) =>
         val elapsedTimeMillis = (captureTime - reqTime) / 1000000
         val loggingString =
-          s"""Request: ${req.method} ${req.uri}, finished with ${resp.status}, took: $elapsedTimeMillis millis"""
+          s"""Request: ${req.method.value} ${req.uri}, finished with ${resp.status.intValue}, took: $elapsedTimeMillis millis"""
         LogEntry(loggingString, logLevel)
       case Rejected(reason) =>
         LogEntry(s"Request rejected, reason: ${reason.mkString(",")}", logLevel)
