@@ -2,10 +2,10 @@ package com.alisiikh.akka.route
 
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.{ Directives, Route }
-import akka.stream.ActorMaterializer
+import akka.stream.Materializer
 import com.alisiikh.akka.directive.LoggingDirectives
 
-class AppRoute(implicit mat: ActorMaterializer) {
+class AppRoute(implicit mat: Materializer) {
   import Directives._
   import LoggingDirectives._
 

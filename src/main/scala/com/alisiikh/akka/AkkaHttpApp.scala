@@ -2,7 +2,7 @@ package com.alisiikh.akka
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.stream.ActorMaterializer
+import akka.stream.Materializer
 import com.alisiikh.akka.route.AppRoute
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.StrictLogging
@@ -33,9 +33,9 @@ object AkkaHttpApp extends App with StrictLogging {
       )
       .withFallback(ConfigFactory.load())
 
-  implicit val system: ActorSystem    = ActorSystem("akka-http", config)
-  implicit val mat: ActorMaterializer = ActorMaterializer()
-  implicit val ec: ExecutionContext   = system.dispatcher
+  implicit val system: ActorSystem  = ActorSystem("akka-http", config)
+  implicit val mat: Materializer    = Materializer(system)
+  implicit val ec: ExecutionContext = system.dispatcher
 
   val host     = "0.0.0.0"
   val port     = 8080

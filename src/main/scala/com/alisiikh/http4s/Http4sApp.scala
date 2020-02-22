@@ -21,10 +21,11 @@ object Http4sApp extends IOApp {
       .withHttpApp(httpApp)
       .serve
 
-  def httpApp[F[_]: ConcurrentEffect: Clock: Logger]: HttpApp[F] =
-    Http4sLogger.httpApp(logHeaders = true, logBody = false) {
-      new AppRoute[F].route.orNotFound
-    }
+  def httpApp[F[_]: ConcurrentEffect: Timer: Logger]: HttpApp[F] =
+    Http4sLogger.httpApp(
+      logHeaders = true,
+      logBody = false
+    )(new AppRoute[F].route.orNotFound)
 
   override def run(args: List[String]): IO[ExitCode] =
     stream[IO].compile.drain.as(ExitCode.Success)
