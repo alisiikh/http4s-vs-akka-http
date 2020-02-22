@@ -22,7 +22,7 @@ object Http4sApp extends IOApp {
       .serve
 
   def httpApp[F[_]: ConcurrentEffect: Clock: Logger]: HttpApp[F] =
-    Http4sLogger.httpApp(logHeaders = true, logBody = true) {
+    Http4sLogger.httpApp(logHeaders = true, logBody = false) {
       new AppRoute[F].route.orNotFound
     }
 
